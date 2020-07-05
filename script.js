@@ -11,7 +11,6 @@ ddListObj = document.getElementById(ddListId);
 
 
 function addOption(value) {
-    // console.log(value);
     
     ulObj = document.querySelector("#" + ddListId + " .dropdown-menu");
     ulObj.innerHTML += templates.li;
@@ -41,18 +40,28 @@ function buildDropdown() {
 
 function selectOption(e) {
     var ddToggleSpan = document.querySelector("#" + ddListId + " .dropdown-toggle span");
-    
+    var selectedLiObj = e.parentNode.parentNode.parentNode;
+
     if (e.checked) {
         if (ddToggleSpan.innerText == "None selected") {
             ddToggleSpan.innerText = e.value;
         } else {
             ddToggleSpan.innerText += ", " + e.value;
         }
-        
+        selectedLiObj.classList.add("active");
+
     } else {
         var optionList = ddToggleSpan.innerText.split(", ");
         filteredOptions = optionList.filter(option => option !== e.value);
-        ddToggleSpan.innerText = filteredOptions.join(", ");
+
+        if (filteredOptions.length > 0) {
+            ddToggleSpan.innerText = filteredOptions.join(", ");
+        } else {
+            ddToggleSpan.innerText = "None selected";
+        }
+        
+
+        selectedLiObj.classList.remove("active");
     }
     var ddToggle = document.querySelector("#" + ddListId + " .dropdown-toggle");
     ddToggle.title = ddToggleSpan.innerText;
