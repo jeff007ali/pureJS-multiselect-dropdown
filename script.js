@@ -21,6 +21,7 @@ function addOption(value) {
 }
 
 function buildDropdown() {
+    ddListObj.classList.add("btn-group", "gfont");
     ddListObj.innerHTML = templates.button + templates.ul;
     options.forEach(addOption);
 
@@ -28,7 +29,6 @@ function buildDropdown() {
     ddToggle.addEventListener("click", function() {
         if (ddListObj.classList.contains("open")) {
             ddListObj.classList.remove("open");
-            console.log(this);
             this.setAttribute('aria-expanded', 'false');
         }
         else {
@@ -36,18 +36,6 @@ function buildDropdown() {
             this.setAttribute('aria-expanded', 'true');
         }
     });
-
-    // var ddMenuCheckBoxes = document.querySelectorAll("#" + ddListId + " .dropdown-menu input[type=checkbox]");
-    // console.log(ddMenuCheckBoxes);
-    // for (ddMenuCheckBox in ddMenuCheckBoxes) {
-    //     ddMenuCheckBox.addEventListener("change", function() {
-    //         if (this.checked){
-    //             console.log(this.value);
-    //         } else {
-    //             console.log(this.value);
-    //         }
-    //     });
-    // }
     
 }
 
