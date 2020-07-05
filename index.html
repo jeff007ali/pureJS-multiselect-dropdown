@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-select</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="btn-group gfont" id="langDDlist">
+  <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="false">
+    <span class="multiselect-selected-text">None selected</span> 
+    <b class="caret"></b>
+  </button>
+  <ul class="multiselect-container dropdown-menu">
+    <li>
+      <a tabindex="0">
+        <label class="checkbox" title="Cheese">
+          <input type="checkbox" value="cheese"> Cheese
+        </label>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- partial -->
+<script src="script.js"></script>
+</body>
+</html>
