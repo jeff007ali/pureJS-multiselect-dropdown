@@ -42,30 +42,38 @@ function selectOption(e) {
     var ddToggleSpan = document.querySelector("#" + ddListId + " .dropdown-toggle span");
     var selectedLiObj = e.parentNode.parentNode.parentNode;
 
+    // Read all checked checkbox and make array of selected options
+    var selectedCheckboxes = document.querySelectorAll("#" + ddListId + " .dropdown-menu input[type='checkbox']:checked");
+    selectedOptionList = []
+    for (var i = 0; i < selectedCheckboxes.length; i++) {
+        selectedOptionList.push(selectedCheckboxes[i].value);
+    }
+
+    // According to if checkbox is selected or not, add class to list item
     if (e.checked) {
-        if (ddToggleSpan.innerText == "None selected") {
-            ddToggleSpan.innerText = e.value;
-        } else {
-            ddToggleSpan.innerText += ", " + e.value;
-        }
         selectedLiObj.classList.add("active");
-
     } else {
-        var optionList = ddToggleSpan.innerText.split(", ");
-        filteredOptions = optionList.filter(option => option !== e.value);
-
-        if (filteredOptions.length > 0) {
-            ddToggleSpan.innerText = filteredOptions.join(", ");
-        } else {
-            ddToggleSpan.innerText = "None selected";
-        }
-        
-
         selectedLiObj.classList.remove("active");
     }
+
+    // As per length of selected checkboxes, show text in span tag
+    if (selectedOptionList.length > 3) {
+        ddToggleSpan.innerText = selectedOptionList.length + " selected";
+    } else if (selectedOptionList.length > 0) {
+        ddToggleSpan.innerText = selectedOptionList.join(", ");
+    } else {
+        ddToggleSpan.innerText = "None selected";
+    }
+
     var ddToggle = document.querySelector("#" + ddListId + " .dropdown-toggle");
     ddToggle.title = ddToggleSpan.innerText;
 }
 
+function closeOptions(e) {
+    if (ddListObj.classList.contains('open')) {
+        console.log(e)
+    }
+}
 
+window.addEventListener("click", closeOptions);
 window.addEventListener("load", buildDropdown);
