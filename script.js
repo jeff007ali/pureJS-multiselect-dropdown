@@ -9,7 +9,6 @@ templates = {
 
 ddListObj = document.getElementById(ddListId);
 
-
 function addOption(value) {
     
     ulObj = document.querySelector("#" + ddListId + " .dropdown-menu");
@@ -42,12 +41,7 @@ function selectOption(e) {
     var ddToggleSpan = document.querySelector("#" + ddListId + " .dropdown-toggle span");
     var selectedLiObj = e.parentNode.parentNode.parentNode;
 
-    // Read all checked checkbox and make array of selected options
-    var selectedCheckboxes = document.querySelectorAll("#" + ddListId + " .dropdown-menu input[type='checkbox']:checked");
-    selectedOptionList = []
-    for (var i = 0; i < selectedCheckboxes.length; i++) {
-        selectedOptionList.push(selectedCheckboxes[i].value);
-    }
+    var selectedOptionList = getSelectedOptionValues()
 
     // According to if checkbox is selected or not, add class to list item
     if (e.checked) {
@@ -69,9 +63,30 @@ function selectOption(e) {
     ddToggle.title = ddToggleSpan.innerText;
 }
 
+function getSelectedOptionValues() {
+    // Read all checked checkbox and make array of selected options
+    var selectedCheckboxes = document.querySelectorAll("#" + ddListId + " .dropdown-menu input[type='checkbox']:checked");
+    var selectedOptionList = []
+    for (var i = 0; i < selectedCheckboxes.length; i++) {
+        selectedOptionList.push(selectedCheckboxes[i].value);
+    }
+    return selectedOptionList
+}
+
+function checkParent(parent, child) {
+    if (parent.contains(child)) 
+        return true; 
+        return false; 
+}
+
 function closeOptions(e) {
-    if (ddListObj.classList.contains('open')) {
-        console.log(e)
+    if (ddListObj.classList.contains('open') && 
+    !checkParent(ddListObj, e.srcElement)) {
+        console.log(e);
+        ddListObj.classList.remove("open");
+
+        var ddToggle = document.querySelector("#" + ddListId + " .dropdown-toggle");
+        ddToggle.setAttribute('aria-expanded', 'false');
     }
 }
 
