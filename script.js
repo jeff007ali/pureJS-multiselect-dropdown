@@ -10,7 +10,6 @@ templates = {
 ddListObj = document.getElementById(ddListId);
 
 function addOption(value) {
-    
     ulObj = document.querySelector("#" + ddListId + " .dropdown-menu");
     ulObj.innerHTML += templates.li;
 
@@ -28,13 +27,11 @@ function buildDropdown() {
         if (ddListObj.classList.contains("open")) {
             ddListObj.classList.remove("open");
             this.setAttribute('aria-expanded', 'false');
-        }
-        else {
+        } else {
             ddListObj.classList.add("open");
             this.setAttribute('aria-expanded', 'true');
         }
     });
-    
 }
 
 function selectOption(e) {
@@ -82,7 +79,6 @@ function checkParent(parent, child) {
 function closeOptions(e) {
     if (ddListObj.classList.contains('open') && 
     !checkParent(ddListObj, e.srcElement)) {
-        console.log(e);
         ddListObj.classList.remove("open");
 
         var ddToggle = document.querySelector("#" + ddListId + " .dropdown-toggle");
